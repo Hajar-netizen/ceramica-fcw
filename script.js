@@ -596,12 +596,14 @@ function setupPhotoModal() {
       modalCaption.textContent = img.alt;
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
     });
   });
 
   const close = () => {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
   };
   if (modalClose) modalClose.addEventListener("click", close);
   modal.addEventListener("click", (e) => {
