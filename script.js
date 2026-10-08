@@ -117,7 +117,7 @@ const fixturesData = [
         day: { en: "SAT 9 JAN 2027", ar: "السبت 9 يناير 2027" },
         time: "14:30", week: 8,
         venue: { en: "El Moassasa El Omalia Stadium", ar: "المؤسسة العمالية" } },
-      { home: "zayed", away: "ceramica",
+      { home: "ceramica", away: "zayed",
         date: "2027-01-29",
         day: { en: "FRI 29 JAN 2027", ar: "الجمعة 29 يناير 2027" },
         time: "14:30", week: 10,
