@@ -1994,6 +1994,15 @@ html[dir="rtl"] .next-match-badge {
   .hero-scroll-hint { display: none; }
   .btn { width: 100%; }
 
+  /* stacked match rows on phones: badge+name, time divider, badge+name */
+  .fixture-teams { flex-direction: column; align-items: stretch; gap: 10px; }
+  .fixture-team { flex: none; width: 100%; }
+  .fixture-team.home { justify-content: flex-start; text-align: start; }
+  .fixture-team.away { text-align: start; }
+  .fixture-team.home .club-badge { order: -1; }
+  .fixture-time { align-self: center; }
+  .fixture-comp { font-size: 0.68rem; letter-spacing: 1.4px; margin-bottom: 16px; }
+
   .staff-item {
     grid-template-columns: 1fr;
     text-align: center;
