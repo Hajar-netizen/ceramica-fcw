@@ -67,7 +67,7 @@ const fixturesData = [
   {
     month: { en: "October 2026", ar: "أكتوبر 2026" },
     games: [
-      { home: "ceramica", away: "sakkara",
+      { home: "sakkara", away: "ceramica",
         date: "2026-10-24",
         day: { en: "SAT 24 OCT 2026", ar: "السبت 24 أكتوبر 2026" },
         time: "15:30", week: 1,
@@ -87,7 +87,7 @@ const fixturesData = [
         day: { en: "SUN 15 NOV 2026", ar: "الأحد 15 نوفمبر 2026" },
         time: "14:30", week: 3,
         venue: { en: "Al Nady Sheraton Club", ar: "نادي النادي شيراتون" } },
-      { home: "ceramica", away: "zayed",
+      { home: "zayed", away: "ceramica",
         date: "2026-11-28",
         day: { en: "SAT 28 NOV 2026", ar: "السبت 28 نوفمبر 2026" },
         time: "14:30", week: 5,
@@ -102,7 +102,7 @@ const fixturesData = [
         day: { en: "SAT 19 DEC 2026", ar: "السبت 19 ديسمبر 2026" },
         time: "14:30", week: 6,
         venue: { en: "Al Nady Sheraton Club", ar: "نادي النادي شيراتون" } },
-      { home: "ceramica", away: "senzo",
+      { home: "senzo", away: "ceramica",
         date: "2026-12-24",
         day: { en: "THU 24 DEC 2026", ar: "الخميس 24 ديسمبر 2026" },
         time: "14:30", week: 7,
@@ -112,12 +112,12 @@ const fixturesData = [
   {
     month: { en: "January 2027", ar: "يناير 2027" },
     games: [
-      { home: "ceramica", away: "qalyub",
+      { home: "qalyub", away: "ceramica",
         date: "2027-01-09",
         day: { en: "SAT 9 JAN 2027", ar: "السبت 9 يناير 2027" },
         time: "14:30", week: 8,
         venue: { en: "El Moassasa El Omalia Stadium", ar: "المؤسسة العمالية" } },
-      { home: "ceramica", away: "zayed",
+      { home: "zayed", away: "ceramica",
         date: "2027-01-29",
         day: { en: "FRI 29 JAN 2027", ar: "الجمعة 29 يناير 2027" },
         time: "14:30", week: 10,
