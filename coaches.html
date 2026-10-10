@@ -18,7 +18,7 @@
   <!-- Analytics: 1) publish the site, 2) add it at dash.cloudflare.com → Web Analytics (free),
        3) paste your token below and uncomment the script. -->
   <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "PASTE_TOKEN_HERE"}'></script> -->
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 
@@ -65,7 +65,7 @@
     <div class="page-banner-overlay"></div>
     <div class="page-banner-content fade-in-up">
       <span class="hero-eyebrow">The Team Behind The Team</span>
-      <h1 data-i18n="coachesHeader">Coaches & Technical Staff</h1>
+      <h1 class="outline-title" data-i18n="coachesHeader">Coaches & Technical Staff</h1>
     </div>
   </section>
 
@@ -75,7 +75,13 @@
         <h2 class="section-title" data-i18n="coachesHeader">Coaches & Technical Staff</h2>
         <p class="staff-lead" data-i18n="staffLead">The passionate minds guiding our squad — from the touchline to the treatment room.</p>
       </div>
-      <div id="coaches-list" class="staff-list"></div>
+      <div class="staff-tabs" role="tablist" aria-label="Staff categories">
+        <button type="button" class="staff-tab active" data-cat="all" data-i18n="tabAll">All</button>
+        <button type="button" class="staff-tab" data-cat="tech" data-i18n="tabTech">Coaches</button>
+        <button type="button" class="staff-tab" data-cat="med" data-i18n="tabMed">Medical</button>
+        <button type="button" class="staff-tab" data-cat="admin" data-i18n="tabAdmin">Admin</button>
+      </div>
+      <div id="coaches-list" class="staff-grid"></div>
     </section>
   </main>
 
@@ -107,6 +113,6 @@
 
   <button id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
 
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

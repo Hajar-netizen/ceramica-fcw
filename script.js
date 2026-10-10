@@ -32,13 +32,13 @@ if (overlay) overlay.addEventListener("click", closeMenu);
 
 /* ---------- Data: Coaches ---------- */
 const coachesData = [
-  { name: { en: "C. Ahmed Talaat", ar: "ك. أحمد طلعت" }, role: { en: "Head Coach", ar: "المدير الفني" }, image: "C. Ahmed Talaat.jpeg" },
-  { name: { en: "C. Abd El aziz", ar: "ك. عبد العزيز" }, role: { en: "General Coach", ar: "المدرب العام" }, image: "C. Abd El aziz.jpeg" },
-  { name: { en: "C. Ahmed Gamal", ar: "ك. أحمد جمال" }, role: { en: "Goalkeeping Coach", ar: "مدرب حراس المرمى" }, image: "C. Ahmed Gamal.jpeg" },
-  { name: { en: "Dr. Nourhan Ahmed", ar: "د. نورهان أحمد" }, role: { en: "Sports Therapist", ar: "أخصائي إصابات ملاعب وتأهيل" }, image: "Dr. Nourhan Ahmed.jpeg" },
-  { name: { en: "Tamer Mahmoud Taha", ar: "تامر محمود طه" }, role: { en: "Team Manager", ar: "المدير الإداري" }, image: "Tamer Mahmoud Taha.jpeg" },
-  { name: { en: "Ahmed Yasser", ar: "أحمد ياسر" }, role: { en: "Team Administrator", ar: "إداري" }, image: "Ahmed Yasser.jpeg" },
-  { name: { en: "Mohamed Tag", ar: "محمد تاج" }, role: { en: "Team Administrator", ar: "إداري" }, image: "Mohamed Tag.jpeg" }
+  { name: { en: "C. Ahmed Talaat", ar: "ك. أحمد طلعت" }, role: { en: "Head Coach", ar: "المدير الفني" }, image: "C. Ahmed Talaat.jpeg", cat: "tech" },
+  { name: { en: "C. Abd El aziz", ar: "ك. عبد العزيز" }, role: { en: "General Coach", ar: "المدرب العام" }, image: "C. Abd El aziz.jpeg", cat: "tech" },
+  { name: { en: "C. Ahmed Gamal", ar: "ك. أحمد جمال" }, role: { en: "Goalkeeping Coach", ar: "مدرب حراس المرمى" }, image: "C. Ahmed Gamal.jpeg", cat: "tech" },
+  { name: { en: "Dr. Nourhan Ahmed", ar: "د. نورهان أحمد" }, role: { en: "Sports Therapist", ar: "أخصائي إصابات ملاعب وتأهيل" }, image: "Dr. Nourhan Ahmed.jpeg", cat: "med" },
+  { name: { en: "Tamer Mahmoud Taha", ar: "تامر محمود طه" }, role: { en: "Team Manager", ar: "المدير الإداري" }, image: "Tamer Mahmoud Taha.jpeg", cat: "admin" },
+  { name: { en: "Ahmed Yasser", ar: "أحمد ياسر" }, role: { en: "Team Administrator", ar: "إداري" }, image: "Ahmed Yasser.jpeg", cat: "admin" },
+  { name: { en: "Mohamed Tag", ar: "محمد تاج" }, role: { en: "Team Administrator", ar: "إداري" }, image: "Mohamed Tag.jpeg", cat: "admin" }
 ];
 
 /* ---------- Data: Players (fill with categories: gk, def, mid, fwd) ---------- */
@@ -171,6 +171,10 @@ const translations = {
     coachesHeader: "Coaches & Technical Staff",
     staffLead: "The passionate minds guiding our squad — from the touchline to the treatment room.",
     staffOfClub: "Proud member of the Ceramica Cleopatra FCW technical staff.",
+    tabAll: "All",
+    tabTech: "Coaches",
+    tabMed: "Medical",
+    tabAdmin: "Admin",
     playersHeader: "Players Roster",
     noPlayersTitle: "Squad Announcement Coming Soon",
     noPlayers: "Players will be announced soon.",
@@ -255,6 +259,10 @@ const translations = {
     coachesHeader: "الجهاز الفني والإداري",
     staffLead: "العقول الشغوفة التي تقود فريقنا — من خط التماس إلى غرفة العلاج.",
     staffOfClub: "عضو فخور في الجهاز الفني لنادي سيراميكا كليوباترا للسيدات.",
+    tabAll: "الكل",
+    tabTech: "المدربون",
+    tabMed: "الطاقم الطبي",
+    tabAdmin: "الإداريون",
     playersHeader: "قائمة اللاعبات",
     noPlayersTitle: "الإعلان عن قائمة الفريق قريباً",
     noPlayers: "سيتم الإعلان عن اللاعبات قريباً.",
@@ -300,34 +308,35 @@ const translations = {
 
 /* ---------- Roster Rendering ---------- */
 function renderRoster(lang, filter = "all", searchQuery = "") {
-  renderCoaches(lang);
+  const activeTab = document.querySelector(".staff-tab.active");
+  renderCoaches(lang, activeTab ? activeTab.dataset.cat : "all");
   renderPlayers(lang, filter, searchQuery);
 }
 
-function renderCoaches(lang) {
+function renderCoaches(lang, cat = "all") {
   const list = $("coaches-list");
   if (!list) return;
 
-  list.innerHTML = coachesData
-    .map(
-      (coach) => {
-        const parts = coach.name[lang].trim().split(/\s+/);
-        const last = parts.length > 1 ? parts.pop() : "";
-        const first = parts.join(" ");
-        return `
-        <article class="staff-item fade-in-up">
-          <div class="staff-detail">
-            ${first ? `<span class="staff-first">${first}</span>` : ""}
-            <h3>${last || coach.name[lang]}</h3>
-            <p class="staff-role">${coach.role[lang]}</p>
-          </div>
-          <div class="staff-photo">
+  const shown = cat === "all" ? coachesData : coachesData.filter((c) => c.cat === cat);
+
+  list.innerHTML = shown
+    .map((coach) => {
+      const parts = coach.name[lang].trim().split(/\s+/);
+      const last = parts.length > 1 ? parts.pop() : "";
+      const first = parts.join(" ");
+      return `
+        <article class="staff-card fade-in-up">
+          <div class="staff-card-photo">
             <img src="${coach.image}" alt="${coach.name[lang]}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=Staff'">
+          </div>
+          <div class="staff-card-body">
+            ${first ? `<span class="staff-card-first">${first}</span>` : ""}
+            <h3>${last || coach.name[lang]}</h3>
+            <p>${coach.role[lang]}</p>
           </div>
         </article>
       `;
-      }
-    )
+    })
     .join("");
 
   // observe new fade-in-up items
@@ -512,6 +521,17 @@ function setupToTop() {
     window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
   });
 }
+
+/* ---------- Staff Tabs ---------- */
+const staffTabs = document.querySelectorAll(".staff-tab");
+staffTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    staffTabs.forEach((b) => b.classList.remove("active"));
+    tab.classList.add("active");
+    const lang = localStorage.getItem("preferredLang") || "en";
+    renderCoaches(lang, tab.dataset.cat);
+  });
+});
 
 /* ---------- Language Switcher ---------- */
 function setLanguage(lang) {

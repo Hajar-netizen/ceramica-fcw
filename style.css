@@ -902,76 +902,41 @@ select {
   gap: 22px;
 }
 
-/* Chelsea-style staff rows: text left, photo bleeding right, red on hover */
-.staff-item {
+/* Profile cards: photo top, name block below, red accents on hover */
+.staff-grid {
   display: grid;
-  grid-template-columns: 1fr 230px;
-  min-height: 230px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.staff-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.38s var(--ease), box-shadow 0.38s, background 0.35s, border-color 0.35s;
+  transition: transform 0.38s var(--ease), box-shadow 0.38s, border-color 0.38s;
 }
 
-.staff-item:hover {
-  transform: translateY(-6px);
-  background: var(--red);
+.staff-card:hover {
+  transform: translateY(-8px);
   border-color: var(--red);
   box-shadow: var(--shadow-lg);
 }
 
-.staff-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: left;
-  padding: 28px clamp(22px, 3vw, 34px);
-}
-
-.staff-first {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-  transition: color 0.35s;
-}
-
-.staff-detail h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--black);
-  margin: 2px 0 8px;
-  transition: color 0.35s;
-}
-
-.staff-role {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--ink-soft);
-  margin: 0;
-  transition: color 0.35s;
-}
-
-.staff-item:hover .staff-first,
-.staff-item:hover .staff-detail h3,
-.staff-item:hover .staff-role {
-  color: #fff;
-}
-
-.staff-photo {
-  position: relative;
-  min-height: 230px;
+.staff-card-photo {
+  height: 300px;
   overflow: hidden;
   background: var(--red-tint);
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.38s;
 }
 
-.staff-photo img {
-  position: absolute;
-  inset: 0;
+.staff-card:hover .staff-card-photo {
+  border-bottom-color: var(--red);
+}
+
+.staff-card-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -979,12 +944,99 @@ select {
   transition: transform 0.6s var(--ease);
 }
 
-.staff-item:hover .staff-photo img {
-  transform: scale(1.06);
+.staff-card:hover .staff-card-photo img {
+  transform: scale(1.05);
 }
 
-html[dir="rtl"] .staff-detail {
+.staff-card-body {
+  padding: 20px 18px 24px;
+  text-align: left;
+}
+
+.staff-card-first {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.staff-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--black);
+  margin: 2px 0 6px;
+  transition: color 0.35s;
+}
+
+.staff-card:hover .staff-card-body h3 {
+  color: var(--red);
+}
+
+.staff-card-body p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+html[dir="rtl"] .staff-card-body {
   text-align: right;
+}
+
+/* category tabs */
+.staff-tabs {
+  display: flex;
+  gap: clamp(18px, 4vw, 42px);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+  overflow-x: auto;
+}
+
+.staff-tab {
+  background: none;
+  border: none;
+  padding: 12px 2px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.staff-tab:hover {
+  color: var(--red-dark);
+}
+
+.staff-tab.active {
+  color: var(--red);
+}
+
+.staff-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--red);
+}
+
+/* outlined display title (page banners) */
+.outline-title {
+  color: transparent !important;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.92);
+  text-shadow: none !important;
+}
+
+@supports not (-webkit-text-stroke: 1px #fff) {
+  .outline-title {
+    color: #fff !important;
+  }
 }
 
 /* --- Players grid --- */
@@ -1617,7 +1669,7 @@ html[dir="rtl"] .page-banner-content h1,
 html[dir="rtl"] .section-title,
 html[dir="rtl"] .fixture-month,
 html[dir="rtl"] .stat-number,
-html[dir="rtl"] .staff-detail h3,
+html[dir="rtl"] .staff-card-body h3,
 html[dir="rtl"] .profile-info h3,
 html[dir="rtl"] .fixture-time,
 html[dir="rtl"] .pillar-num,
@@ -1638,8 +1690,7 @@ html[dir="rtl"] .fixture-comp,
 html[dir="rtl"] .fixture-venue,
 html[dir="rtl"] .fixture-week,
 html[dir="rtl"] .stat-label,
-html[dir="rtl"] .staff-detail h3,
-html[dir="rtl"] .staff-role,
+html[dir="rtl"] .staff-card-body h3,
 html[dir="rtl"] .news-badge,
 html[dir="rtl"] .pillar-card h3,
 html[dir="rtl"] .value-item strong,
@@ -1942,8 +1993,8 @@ html[dir="rtl"] .next-match-badge {
   .pillars-grid,
   .about-grid { grid-template-columns: 1fr; }
 
-  .staff-item { grid-template-columns: 1fr 190px; }
-  .staff-photo { min-height: 190px; }
+  .staff-grid { grid-template-columns: repeat(2, 1fr); }
+  .staff-card-photo { height: 260px; }
 
   .club-badge { width: 56px; height: 56px; }
   .fixture-time { padding: 7px 12px; }
@@ -1988,13 +2039,15 @@ html[dir="rtl"] .next-match-badge {
   .fixture-time { align-self: center; flex-shrink: 0; }
   .fixture-comp { font-size: 0.68rem; letter-spacing: 1.4px; margin-bottom: 16px; }
 
-  .staff-item {
+  .staff-grid {
     grid-template-columns: 1fr;
+    max-width: 340px;
+    margin: 0 auto;
   }
 
-  .staff-photo { min-height: 240px; order: -1; }
+  .staff-card-photo { height: 320px; }
 
-  .staff-detail { text-align: center; }
+  .staff-tabs { gap: 20px; }
 
   .footer-top {
     flex-direction: column;
@@ -2093,8 +2146,8 @@ html[dir="rtl"] .next-match-badge {
     font-size: 1.6rem;
   }
 
-  .staff-detail h3 {
-    font-size: 1.5rem;
+  .staff-card-body h3 {
+    font-size: 1.35rem;
   }
 
   .content-box {
