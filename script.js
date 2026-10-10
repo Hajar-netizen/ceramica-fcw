@@ -310,20 +310,23 @@ function renderCoaches(lang) {
 
   list.innerHTML = coachesData
     .map(
-      (coach, i) => `
+      (coach) => {
+        const parts = coach.name[lang].trim().split(/\s+/);
+        const last = parts.length > 1 ? parts.pop() : "";
+        const first = parts.join(" ");
+        return `
         <article class="staff-item fade-in-up">
-          <div class="staff-photo">
-            <img src="${coach.image}" alt="${coach.name[lang]}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=Staff'">
-            <span class="staff-index">${String(i + 1).padStart(2, "0")}</span>
-          </div>
           <div class="staff-detail">
-            <span class="staff-role">${coach.role[lang]}</span>
-            <h3>${coach.name[lang]}</h3>
-            <div class="staff-line"></div>
-            <p class="staff-bio" data-i18n="staffOfClub">Proud member of the Ceramica Cleopatra FCW technical staff.</p>
+            ${first ? `<span class="staff-first">${first}</span>` : ""}
+            <h3>${last || coach.name[lang]}</h3>
+            <p class="staff-role">${coach.role[lang]}</p>
+          </div>
+          <div class="staff-photo">
+            <img src="${coach.image}" alt="${coach.name[lang]}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=Staff'">
           </div>
         </article>
-      `
+      `;
+      }
     )
     .join("");
 
