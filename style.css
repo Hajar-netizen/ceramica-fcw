@@ -2041,11 +2041,22 @@ html[dir="rtl"] .next-match-badge {
 
   .staff-grid {
     grid-template-columns: 1fr;
-    max-width: 340px;
-    margin: 0 auto;
+    gap: 14px;
   }
 
-  .staff-card-photo { height: 320px; }
+  /* horizontal rows on phones: text left, photo right */
+  .staff-card {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    min-height: 150px;
+  }
+
+  .staff-card-body { order: 1; padding: 18px; }
+  .staff-card-photo { order: 2; height: 100%; min-height: 150px; border-bottom: none; }
+  .staff-card:hover .staff-card-photo { border-bottom-color: transparent; }
+  .staff-card-first { font-size: 0.82rem; }
+  .staff-card-body h3 { font-size: 1.3rem; }
+  .staff-card-body p { font-size: 0.85rem; }
 
   .staff-tabs { gap: 20px; }
 
@@ -2146,9 +2157,12 @@ html[dir="rtl"] .next-match-badge {
     font-size: 1.6rem;
   }
 
+  .staff-card { grid-template-columns: 1fr 120px; }
+  .staff-card-body { padding: 14px; }
   .staff-card-body h3 {
-    font-size: 1.35rem;
+    font-size: 1.15rem;
   }
+  .staff-card-first { font-size: 0.78rem; }
 
   .content-box {
     padding: 22px 18px;
