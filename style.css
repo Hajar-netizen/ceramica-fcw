@@ -1454,8 +1454,8 @@ body.modal-open {
   flex-shrink: 0;
   border-radius: 50%;
   background: #fff;
-  border: 3px solid var(--red);
-  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.18);
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 12px rgba(20, 20, 24, 0.08);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -1480,9 +1480,9 @@ body.modal-open {
 }
 
 .fixture-card:hover .club-badge {
-  border-color: var(--red-dark);
+  border-color: var(--line);
   transform: scale(1.06);
-  box-shadow: 0 8px 22px rgba(200, 16, 46, 0.3);
+  box-shadow: 0 8px 20px rgba(20, 20, 24, 0.14);
 }
 
 .fixture-time {
@@ -2011,13 +2011,12 @@ html[dir="rtl"] .next-match-badge {
   .modal-content { max-width: 94vw; max-height: 80vh; }
   .modal-caption { font-size: 0.8rem; margin-top: 12px; }
 
-  /* stacked match rows on phones: badge+name, time divider, badge+name */
-  .fixture-teams { flex-direction: column; align-items: stretch; gap: 10px; }
-  .fixture-team { flex: none; width: 100%; }
-  .fixture-team.home { justify-content: flex-start; text-align: start; }
-  .fixture-team.away { text-align: start; }
+  /* side-by-side columns on phones: logo over name, time between */
+  .fixture-teams { flex-direction: row; align-items: center; gap: 8px; }
+  .fixture-team { flex: 1 1 0; flex-direction: column; align-items: center; gap: 8px; min-width: 0; }
+  .fixture-team.home, .fixture-team.away { justify-content: flex-start; text-align: center; }
   .fixture-team.home .club-badge { order: -1; }
-  .fixture-time { align-self: center; }
+  .fixture-time { align-self: center; flex-shrink: 0; }
   .fixture-comp { font-size: 0.68rem; letter-spacing: 1.4px; margin-bottom: 16px; }
 
   .staff-item {
@@ -2091,11 +2090,10 @@ html[dir="rtl"] .next-match-badge {
     font-size: 0.78rem;
   }
 
-  .club-badge {
-    width: 44px;
-    height: 44px;
-    border-width: 2px;
-  }
+    .club-badge {
+      width: 52px;
+      height: 52px;
+    }
 
   .club-badge i {
     font-size: 1rem;
