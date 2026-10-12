@@ -339,7 +339,7 @@ function renderCoaches(lang, cat = "all") {
       return `
         <article class="staff-card fade-in-up">
           <div class="staff-card-photo">
-            <img src="${coach.image}" alt="${coach.name[lang]}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=Staff'">
+            <img src="${coach.image}" alt="${coach.name[lang]}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://via.placeholder.com/400?text=Staff'">
           </div>
           <div class="staff-card-body">
             ${first ? `<span class="staff-card-first">${first}</span>` : ""}
@@ -386,7 +386,7 @@ function renderPlayers(lang, filter, searchQuery) {
       (player) => `
       <div class="profile-card">
         <div class="profile-img-wrapper">
-          <img src="${player.image}" alt="${player.name[lang]}" onerror="this.onerror=null;this.src='https://via.placeholder.com/300?text=Player'">
+          <img src="${player.image}" alt="${player.name[lang]}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://via.placeholder.com/300?text=Player'">
         </div>
         <div class="profile-info">
           <h3>${player.name[lang]}</h3>
@@ -402,7 +402,7 @@ function renderPlayers(lang, filter, searchQuery) {
 function clubBadge(key, lang) {
   const c = clubs[key];
   const img = c.logo
-    ? `<img src="${c.logo}" alt="${c.name[lang]}" loading="lazy" onerror="this.remove()">`
+    ? `<img src="${c.logo}" alt="${c.name[lang]}" loading="lazy" decoding="async" onerror="this.remove()">`
     : "";
   return `<span class="club-badge"><i>${c.initial}</i>${img}</span>`;
 }
@@ -624,7 +624,15 @@ function syncHeader() {
   }, 500);
 }
 
-window.addEventListener("scroll", syncHeader, { passive: true });
+let headerTick = false;
+window.addEventListener("scroll", () => {
+  if (headerTick) return;
+  headerTick = true;
+  requestAnimationFrame(() => {
+    syncHeader();
+    headerTick = false;
+  });
+}, { passive: true });
 
 /* ---------- Back to top ---------- */
 function setupToTop() {
