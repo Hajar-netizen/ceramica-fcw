@@ -55,14 +55,16 @@ const playersData = [
 /* ---------- Data: Clubs (logos) ----------
    Logo files live next to this file with the names below. */
 const clubs = {
-  ceramica: { name: { en: "Ceramica Cleopatra FCW", ar: "سيراميكا كليوباترا" }, logo: "logo.png", initial: "C" },
-  sakkara:  { name: { en: "Sakkara SC", ar: "نادي سقارة" }, logo: "سقاره logo.jpeg", initial: "S" },
-  senzo:    { name: { en: "Senzo SC", ar: "نادي سنزو" }, logo: "سينزو logo.jpeg", initial: "SE" },
-  zayed:    { name: { en: "El Sheikh Zayed", ar: "الشيخ زايد" }, logo: "شيخ زايد logo.jpeg", initial: "Z" },
-  qalyub:   { name: { en: "Qalyub SC", ar: "نادي قليوب" }, logo: "قليوب logo.jpeg", initial: "Q" }
+  ceramica: { name: { en: "Ceramica Cleopatra FCW", ar: "سيراميكا كليوباترا" }, short: { en: "Ceramica", ar: "سيراميكا" }, logo: "logo.png", initial: "C" },
+  sakkara:  { name: { en: "Sakkara SC", ar: "نادي سقارة" }, short: { en: "Sakkara", ar: "سقارة" }, logo: "سقاره logo.jpeg", initial: "S" },
+  senzo:    { name: { en: "Senzo SC", ar: "نادي سنزو" }, short: { en: "Senzo", ar: "سنزو" }, logo: "سينزو logo.jpeg", initial: "SE" },
+  zayed:    { name: { en: "El Sheikh Zayed", ar: "الشيخ زايد" }, short: { en: "Zayed", ar: "زايد" }, logo: "شيخ زايد logo.jpeg", initial: "Z" },
+  qalyub:   { name: { en: "Qalyub SC", ar: "نادي قليوب" }, short: { en: "Qalyub", ar: "قليوب" }, logo: "قليوب logo.jpeg", initial: "Q" }
 };
 
-/* ---------- Data: Fixtures (EFA Women's Third Division 2026/2027, Group 2) ---------- */
+/* ---------- Data: Fixtures (EFA Women's Third Division 2026/2027, Group 2) ----------
+   To show a final score on a finished game, add  score: { h: 2, a: 1 },
+   (home goals first) to that game. Example: { home: "sakkara", ... score: { h: 1, a: 2 }, ... } */
 const fixturesData = [
   {
     month: { en: "October 2026", ar: "أكتوبر 2026" },
@@ -197,7 +199,9 @@ const translations = {
     fixturesNote: "All times are Cairo local time. Schedule source: EFA Women's Third Division 2026/27.",
     competition: "Egyptian Women's Third Division",
     week: "Week",
-    played: "Played",
+    played: "Finished",
+    matchday: "Matchday",
+    versus: "vs",
 
     // Next match teaser
     nextMatch: "Next Match",
@@ -286,6 +290,8 @@ const translations = {
     competition: "الدوري المصري للسيدات – الدرجة الثالثة",
     week: "الأسبوع",
     played: "انتهت",
+    matchday: "الجولة",
+    versus: "×",
 
     // Next match teaser
     nextMatch: "المباراة القادمة",
@@ -429,7 +435,7 @@ function renderFixtures(lang) {
             <p class="fixture-comp">${t.competition}</p>
             <div class="fixture-teams">
               ${fixtureTeam(g.home, lang, "home")}
-              <div class="fixture-time">${g.time}</div>
+              <div class="fixture-time">${g.score ? `${g.score.h} – ${g.score.a}` : g.time}</div>
               ${fixtureTeam(g.away, lang, "away")}
             </div>
             <p class="fixture-venue">${g.venue[lang]}</p>
@@ -534,6 +540,22 @@ function setupHeroTilt() {
   });
 }
 
+/* ---------- Matchday bar (auto-advances after every match) ---------- */
+function renderAnnouncement(lang) {
+  const bar = $("matchdayBar");
+  if (!bar) return;
+
+  const t = translations[lang];
+  const g = nextGame();
+
+  if (!g) {
+    bar.textContent = t.seasonDone;
+    return;
+  }
+
+  bar.textContent = `${t.matchday} ${g.week} · ${clubs[g.home].short[lang]} ${t.versus} ${clubs[g.away].short[lang]} · ${g.day[lang]}, ${g.time}`;
+}
+
 /* ---------- Back to top ---------- */
 function setupToTop() {
   const btn = $("toTop");
@@ -598,6 +620,7 @@ function setLanguage(lang) {
     renderRoster(lang, currentFilter, currentSearch);
     renderFixtures(lang);
     renderNextMatch(lang);
+    renderAnnouncement(lang);
 
     if (mainContent) mainContent.classList.remove("lang-fading");
   }, 300);
