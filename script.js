@@ -137,12 +137,12 @@ const translations = {
     aboutTeam: "About Team",
     media: "Media",
     fixtures: "Fixtures",
-    announcement: "🔥 The 2026/27 season starts soon — follow us for fixture updates!",
+    announcement: "Matchday 1 · Sakkara vs Ceramica — Sat 24 Oct, 15:30",
 
     // Hero
     heroEyebrow: "Official Club Site",
     heroTitle: "Ceramica Cleopatra <span>FCW</span>",
-    heroSubtitle: "Official Women's Football Team Page",
+    heroSubtitle: "Egyptian Women's Third Division · 2026/27",
     viewPlayers: "Meet the Squad",
     viewFixtures: "View Fixtures",
     viewMedia: "Watch Highlights",
@@ -154,18 +154,18 @@ const translations = {
     statCommitment: "% Commitment",
 
     // Home content
-    welcomeHeader: "Welcome to the Official Home",
-    welcomeText: "Welcome to the official hub of Ceramica Cleopatra Women's Football Team. Competing in the Egyptian domestic competitions, our squad is built on hard work, dedication, and a strong drive to elevate the standards of women's football in Egypt.",
+    welcomeHeader: "The Home Of Ceramica FCW",
+    welcomeText: "Ceramica Cleopatra's women's first team — Third Division football based at Al Nady Sheraton. Fixtures, squad news and match updates, all in one place.",
     newsHeader: "Latest Updates",
-    newsTitle1: "League Preparations Underway",
-    newsText1: "The technical staff and players are deep into training sessions, sharpening tactical awareness and physical conditioning ahead of the upcoming Egyptian Women's Third Division fixtures.",
-    pillarsHeader: "Our Focus",
-    pillar1Title: "Domestic Ambition",
-    pillar1Text: "Competing fiercely week in and week out in the Egyptian league setup.",
-    pillar2Title: "Talent Development",
-    pillar2Text: "Providing a professional pathway for young female players to excel at the highest national level.",
-    pillar3Title: "Team Spirit",
-    pillar3Text: "Cultivating a united, disciplined squad culture dedicated to continuous improvement.",
+    newsTitle1: "Countdown To Matchday 1",
+    newsText1: "Season opener: away at Sakkara SC on Saturday 24 October, 15:30. The squad list drops here first.",
+    pillarsHeader: "The Standards",
+    pillar1Title: "Win Every Week",
+    pillar1Text: "Ten league weekends. Home or away, same target.",
+    pillar2Title: "Build Players",
+    pillar2Text: "A genuine pathway from youth football to the first team.",
+    pillar3Title: "One Squad",
+    pillar3Text: "Discipline, unity, work rate. Every session, every match.",
 
     // Roster pages
     coachesHeader: "Coaches & Technical Staff",
@@ -225,12 +225,12 @@ const translations = {
     aboutTeam: "عن الفريق",
     media: "المركز الإعلامي",
     fixtures: "المباريات",
-    announcement: "🔥 موسم 2026/27 يبدأ قريباً — تابعونا لمستجدات المباريات!",
+    announcement: "الجولة 1 · سقارة × سيراميكا — السبت 24 أكتوبر، 15:30",
 
     // Hero
     heroEyebrow: "الموقع الرسمي للنادي",
     heroTitle: "سيراميكا كليوباترا <span>FCW</span>",
-    heroSubtitle: "الصفحة الرسمية لفريق كرة القدم النسائية",
+    heroSubtitle: "دوري السيدات – الدرجة الثالثة · 2026/27",
     viewPlayers: "تعرف على الفريق",
     viewFixtures: "عرض المباريات",
     viewMedia: "شاهد اللقطات",
@@ -242,18 +242,18 @@ const translations = {
     statCommitment: "% الالتزام",
 
     // Home content
-    welcomeHeader: "مرحباً بكم في الصفحة الرسمية",
-    welcomeText: "مرحباً بكم في الموقع الرسمي لفريق سيدات سيراميكا كليوباترا لكرة القدم. ينافس فريقنا في البطولات المحلية المصرية، وهو مبني على العمل الجاد والتفاني، والدافع القوي للارتقاء بمستوى كرة القدم النسائية في مصر.",
+    welcomeHeader: "بيت سيراميكا FCW",
+    welcomeText: "الفريق الأول لسيدات سيراميكا كليوباترا — كرة الدرجة الثالثة انطلاقاً من نادي النادي شيراتون. المباريات وأخبار الفريق وكل المستجدات في مكان واحد.",
     newsHeader: "أحدث الأخبار",
-    newsTitle1: "الاستعدادات للدوري جارية",
-    newsText1: "يخوض الجهاز الفني واللاعبات تدريبات مكثفة، لرفع الوعي التكتيكي واللياقة البدنية استعداداً لمباريات الدوري المصري درجه ثالثة للسيدات القادمة.",
-    pillarsHeader: "تركيزنا",
-    pillar1Title: "الطموح المحلي",
-    pillar1Text: "المنافسة بشراسة أسبوعاً بعد أسبوع في منظومة الدوري المصري.",
-    pillar2Title: "تنمية المواهب",
-    pillar2Text: "توفير مسار احترافي للاعبات الشابات للتألق على أعلى المستويات الوطنية.",
-    pillar3Title: "روح الفريق",
-    pillar3Text: "ترسيخ ثقافة الفريق الموحد والمنضبط، والمكرس للتطوير المستمر.",
+    newsTitle1: "العد التنازلي للجولة الأولى",
+    newsText1: "الافتتاح: خارج ملعبنا أمام سقارة يوم السبت 24 أكتوبر، 15:30. قائمة الفريق تُعلن هنا أولاً.",
+    pillarsHeader: "معاييرنا",
+    pillar1Title: "الفوز كل أسبوع",
+    pillar1Text: "عشر جولات في الدوري. في ملعبنا أو خارجه، الهدف واحد.",
+    pillar2Title: "صناعة اللاعبات",
+    pillar2Text: "طريق حقيقي من كرة الناشئات إلى الفريق الأول.",
+    pillar3Title: "فريق واحد",
+    pillar3Text: "الانضباط والوحدة والعمل الجاد. كل تمرين، كل مباراة.",
 
     // Roster pages
     coachesHeader: "الجهاز الفني والإداري",
@@ -507,6 +507,33 @@ function markActiveNav() {
   });
 }
 
+/* ---------- Hero tilt (desktop pointers only) ---------- */
+function setupHeroTilt() {
+  const hero = document.querySelector(".hero-banner");
+  const ring = document.querySelector(".hero-logo-ring");
+  const content = document.querySelector(".hero-content");
+  if (!hero || !ring || !content) return;
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let raf = null;
+  hero.addEventListener("mousemove", (e) => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      ring.style.translate = `${(x * 18).toFixed(1)}px ${(y * 14).toFixed(1)}px`;
+      content.style.translate = `${(x * -8).toFixed(1)}px ${(y * -6).toFixed(1)}px`;
+      raf = null;
+    });
+  });
+  hero.addEventListener("mouseleave", () => {
+    ring.style.translate = "0px 0px";
+    content.style.translate = "0px 0px";
+  });
+}
+
 /* ---------- Back to top ---------- */
 function setupToTop() {
   const btn = $("toTop");
@@ -698,6 +725,8 @@ function observeFadeIns() {
 
 /* ---------- Init ---------- */
 function init() {
+  document.body.classList.add("loaded");
+  setupHeroTilt();
   setupPhotoModal();
   observeFadeIns();
   animateCounters();
