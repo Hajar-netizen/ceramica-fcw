@@ -208,6 +208,9 @@ const translations = {
     kickoffToday: "Kick-off today!",
     daysLeft: "days left",
     viewAllFixtures: "View all fixtures",
+    lastResult: "Last Result",
+    fromGallery: "From The Gallery",
+    viewGallery: "View Gallery",
     seasonDone: "All scheduled matches have been played — see you next season.",
 
     // About
@@ -298,6 +301,9 @@ const translations = {
     kickoffToday: "المباراة اليوم!",
     daysLeft: "يوم متبقٍ",
     viewAllFixtures: "عرض جميع المباريات",
+    lastResult: "آخر نتيجة",
+    fromGallery: "من المعرض",
+    viewGallery: "عرض المعرض",
     seasonDone: "انتهت جميع المباريات المجدولة — نراكم الموسم القادم.",
 
     // About
@@ -501,6 +507,46 @@ function renderNextMatch(lang) {
   observeFadeIns();
 }
 
+/* ---------- Last Result (latest scored, already played) ---------- */
+function lastScoredGame() {
+  const now = Date.now();
+  const done = [];
+  fixturesData.forEach((group) => {
+    group.games.forEach((g) => {
+      if (g.score && kickoffOf(g).getTime() < now) done.push(g);
+    });
+  });
+  done.sort((a, b) => kickoffOf(b) - kickoffOf(a));
+  return done.length ? done[0] : null;
+}
+
+function renderLastResult(lang) {
+  const slot = $("last-result");
+  if (!slot) return;
+
+  const t = translations[lang];
+  const g = lastScoredGame();
+  if (!g) {
+    slot.innerHTML = "";
+    return;
+  }
+
+  slot.innerHTML = `
+    <article class="next-match-card result-card fade-in-up">
+      <span class="next-match-badge">${t.lastResult}</span>
+      <div class="fixture-teams">
+        ${fixtureTeam(g.home, lang, "home")}
+        <div class="fixture-time">${g.score.h} – ${g.score.a}</div>
+        ${fixtureTeam(g.away, lang, "away")}
+      </div>
+      <p class="next-match-when">${g.day[lang]} &bull; ${g.venue[lang]}</p>
+      <a class="btn btn-red btn-sm" href="fixtures.html">${t.viewAllFixtures}</a>
+    </article>
+  `;
+
+  observeFadeIns();
+}
+
 /* ---------- Active nav highlight ---------- */
 function markActiveNav() {
   const page = (location.pathname.split("/").pop() || "index.html").toLowerCase();
@@ -510,33 +556,6 @@ function markActiveNav() {
       a.classList.add("active");
       a.setAttribute("aria-current", "page");
     }
-  });
-}
-
-/* ---------- Hero tilt (desktop pointers only) ---------- */
-function setupHeroTilt() {
-  const hero = document.querySelector(".hero-banner");
-  const ring = document.querySelector(".hero-logo-ring");
-  const content = document.querySelector(".hero-content");
-  if (!hero || !ring || !content) return;
-  if (!window.matchMedia("(pointer: fine)").matches) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  let raf = null;
-  hero.addEventListener("mousemove", (e) => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      ring.style.translate = `${(x * 18).toFixed(1)}px ${(y * 14).toFixed(1)}px`;
-      content.style.translate = `${(x * -8).toFixed(1)}px ${(y * -6).toFixed(1)}px`;
-      raf = null;
-    });
-  });
-  hero.addEventListener("mouseleave", () => {
-    ring.style.translate = "0px 0px";
-    content.style.translate = "0px 0px";
   });
 }
 
@@ -620,6 +639,7 @@ function setLanguage(lang) {
     renderRoster(lang, currentFilter, currentSearch);
     renderFixtures(lang);
     renderNextMatch(lang);
+    renderLastResult(lang);
     renderAnnouncement(lang);
 
     if (mainContent) mainContent.classList.remove("lang-fading");
@@ -749,7 +769,6 @@ function observeFadeIns() {
 /* ---------- Init ---------- */
 function init() {
   document.body.classList.add("loaded");
-  setupHeroTilt();
   setupPhotoModal();
   observeFadeIns();
   animateCounters();

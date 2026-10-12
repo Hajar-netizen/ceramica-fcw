@@ -21,7 +21,7 @@
   <!-- Analytics: 1) publish the site, 2) add it at dash.cloudflare.com → Web Analytics (free),
        3) paste your token below and uncomment the script. -->
   <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "PASTE_TOKEN_HERE"}'></script> -->
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 </head>
 <body>
 
@@ -109,6 +109,7 @@
 
   <main class="home-main">
     <div id="next-match"></div>
+    <div id="last-result"></div>
 
     <div class="content-box fade-in-up">
       <div class="content-icon">🏆</div>
@@ -145,6 +146,16 @@
           <h3 data-i18n="pillar3Title">Team Spirit</h3>
           <p data-i18n="pillar3Text">Cultivating a united, disciplined squad culture dedicated to continuous improvement.</p>
         </div>
+      </div>
+    <div class="content-box fade-in-up">
+      <h2 data-i18n="fromGallery">From The Gallery</h2>
+      <div class="home-gallery">
+        <a href="media.html" class="home-shot"><img src="team 17.jpeg" alt="Team photo" loading="lazy"></a>
+        <a href="media.html" class="home-shot"><img src="team 18.jpeg" alt="Match action" loading="lazy"></a>
+        <a href="media.html" class="home-shot"><img src="team 11.jpeg" alt="Squad photo" loading="lazy"></a>
+      </div>
+      <div class="text-center">
+        <a href="media.html" class="btn btn-red btn-sm" data-i18n="viewGallery">View Gallery</a>
       </div>
     </div>
   </main>
@@ -185,6 +196,6 @@
 
   <button id="toTop" aria-label="Back to top" title="Back to top">&uarr;</button>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>
