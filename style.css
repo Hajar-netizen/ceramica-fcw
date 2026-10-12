@@ -397,6 +397,26 @@ select {
   background-size: cover;
   background-position: center;
   isolation: isolate;
+  overflow: hidden;
+}
+
+/* giant ghost watermark behind the hero content */
+.hero-banner::after {
+  content: 'FCW';
+  position: absolute;
+  left: 50%;
+  bottom: -3vw;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(9rem, 28vw, 24rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero-overlay {
@@ -404,9 +424,8 @@ select {
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(60% 45% at 50% 28%, rgba(227, 168, 43, 0.16) 0%, transparent 70%),
-    radial-gradient(ellipse at 50% 42%, rgba(200, 16, 46, 0.5) 0%, transparent 62%),
-    linear-gradient(165deg, rgba(20, 20, 24, 0.86) 0%, rgba(94, 5, 20, 0.78) 55%, rgba(20, 20, 24, 0.92) 100%);
+    radial-gradient(ellipse at 50% 40%, rgba(200, 16, 46, 0.5) 0%, transparent 62%),
+    linear-gradient(165deg, rgba(20, 20, 24, 0.82) 0%, rgba(94, 5, 20, 0.72) 55%, rgba(20, 20, 24, 0.9) 100%);
 }
 
 .hero-content {
@@ -481,11 +500,11 @@ select {
 
 .hero-content h1 span {
   display: inline-block;
-  background: linear-gradient(180deg, var(--gold-soft), var(--gold));
-  color: #2A0A10;
+  background: var(--white);
+  color: var(--red);
   padding: 0 16px;
   border-radius: 8px;
-  box-shadow: 0 8px 26px rgba(227, 168, 43, 0.35);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4), inset 0 -4px 0 var(--gold);
   transition: background 0.35s, color 0.35s, box-shadow 0.35s;
 }
 
@@ -614,15 +633,17 @@ select {
               inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* gold speed stripes over faint white grain — big-club pattern */
+/* subtle diagonal texture on the photo-less hero */
 .hero-pattern {
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 1;
-  background-image:
-    repeating-linear-gradient(115deg, rgba(227, 168, 43, 0.10) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.045) 0 1px, transparent 1px 13px);
+  opacity: 0.04;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #fff 0, #fff 1px,
+    transparent 1px, transparent 22px
+  );
   pointer-events: none;
 }
 
@@ -656,7 +677,7 @@ select {
   width: 4px;
   height: 8px;
   border-radius: 3px;
-  background: var(--red);
+  background: var(--gold);
   transform: translateX(-50%);
   animation: scrollDot 1.7s ease-in-out infinite;
 }
@@ -906,10 +927,7 @@ select {
 .page-banner-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(60% 50% at 50% 40%, rgba(227, 168, 43, 0.14), transparent 70%),
-    repeating-linear-gradient(115deg, rgba(227, 168, 43, 0.08) 0 2px, transparent 2px 24px),
-    linear-gradient(160deg, rgba(20, 20, 24, 0.86), rgba(200, 16, 46, 0.6));
+  background: linear-gradient(160deg, rgba(20, 20, 24, 0.86), rgba(200, 16, 46, 0.6));
 }
 
 .page-banner-content {
