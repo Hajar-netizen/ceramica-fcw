@@ -575,6 +575,57 @@ function renderAnnouncement(lang) {
   bar.textContent = `${t.matchday} ${g.week} · ${clubs[g.home].short[lang]} ${t.versus} ${clubs[g.away].short[lang]} · ${g.day[lang]}, ${g.time}`;
 }
 
+/* ---------- Shrinking header: logo glides to center on scroll ---------- */
+function syncHeader() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+  const logo = header.querySelector(".brand-logo");
+  if (!logo) return;
+
+  const want = window.scrollY > 70;
+  const has = header.classList.contains("scrolled");
+  if (want === has) return;
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    header.classList.toggle("scrolled", want);
+    return;
+  }
+
+  const first = logo.getBoundingClientRect();
+
+  if (want) {
+    header.classList.add("scrolled");
+    logo.style.transition = "none";
+    logo.style.transform = "";
+    const last = logo.getBoundingClientRect();
+    const dx = first.left + first.width / 2 - (last.left + last.width / 2);
+    const dy = first.top + first.height / 2 - (last.top + last.height / 2);
+    logo.style.transform = `translate(calc(-50% + ${dx.toFixed(1)}px), calc(-50% + ${dy.toFixed(1)}px))`;
+    logo.getBoundingClientRect();
+    logo.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+    logo.style.transform = "translate(-50%, -50%)";
+  } else {
+    header.classList.remove("scrolled");
+    logo.style.transition = "none";
+    logo.style.transform = "";
+    const last = logo.getBoundingClientRect();
+    const dx = first.left + first.width / 2 - (last.left + last.width / 2);
+    const dy = first.top + first.height / 2 - (last.top + last.height / 2);
+    logo.style.transform = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px)`;
+    logo.getBoundingClientRect();
+    logo.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+    logo.style.transform = "translate(0px, 0px)";
+  }
+
+  clearTimeout(logo._ht);
+  logo._ht = setTimeout(() => {
+    logo.style.transition = "";
+    logo.style.transform = "";
+  }, 500);
+}
+
+window.addEventListener("scroll", syncHeader, { passive: true });
+
 /* ---------- Back to top ---------- */
 function setupToTop() {
   const btn = $("toTop");
@@ -775,6 +826,7 @@ function init() {
   setupFooterYear();
   markActiveNav();
   setupToTop();
+  syncHeader();
 }
 
 function setupFooterYear() {

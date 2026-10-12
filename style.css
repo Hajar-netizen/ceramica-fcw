@@ -119,9 +119,36 @@ select {
   top: 0;
   z-index: 100;
   box-shadow: var(--shadow-sm);
+  transition: height 0.35s var(--ease), box-shadow 0.35s;
+}
+
+/* compact state on scroll: title fades out, logo centers */
+.site-header.scrolled {
+  height: 58px;
+  box-shadow: var(--shadow);
+}
+
+.site-header.scrolled .brand-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.site-header.scrolled .brand-logo img {
+  height: 42px;
+  width: 42px;
+}
+
+.site-header.scrolled .brand-title {
+  opacity: 0;
+  max-width: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, max-width 0.35s var(--ease), visibility 0s 0.35s;
 }
 
 .brand-logo {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 13px;
@@ -138,7 +165,8 @@ select {
   border: 2px solid var(--red-tint-2);
   cursor: pointer;
   transition: background 0.35s var(--ease), border-color 0.35s var(--ease),
-              transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+              transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+              width 0.35s var(--ease), height 0.35s var(--ease);
 }
 
 /* LOGO HOVER: red instead of white */
@@ -150,6 +178,11 @@ select {
 }
 
 .brand-title {
+  position: absolute;
+  inset-inline-start: calc(100% + 13px);
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: min(320px, 52vw);
   font-family: var(--font-display);
   font-size: clamp(1rem, 2.4vw, 1.4rem);
   font-weight: 600;
@@ -160,6 +193,7 @@ select {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: opacity 0.3s, max-width 0.35s var(--ease);
 }
 
 .brand-title::first-line {
